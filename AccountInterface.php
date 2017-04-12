@@ -9,7 +9,7 @@
 
 namespace PolderKnowledge\UserModels;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -28,9 +28,9 @@ interface AccountInterface
     /**
      * Gets the date and time of when this identity was created.
      *
-     * @return DateTimeInterface Returns an instance of type DateTimeInterface
+     * @return DateTimeImmutable Returns an instance of type DateTimeImmutable
      */
-    public function getCreationDate(): DateTimeInterface;
+    public function getCreationDate(): DateTimeImmutable;
 
     /**
      * Gets a list with identities that have access to this account.

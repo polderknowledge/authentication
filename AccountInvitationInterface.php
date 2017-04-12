@@ -9,6 +9,7 @@
 
 namespace PolderKnowledge\UserModels;
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
@@ -27,9 +28,9 @@ interface AccountInvitationInterface
     /**
      * Gets the date and time of when this invitation was created.
      *
-     * @return DateTimeInterface Returns an instance of type DateTimeInterface
+     * @return DateTimeImmutable Returns an instance of type DateTimeImmutable
      */
-    public function getCreationDate(): DateTimeInterface;
+    public function getCreationDate(): DateTimeImmutable;
 
     /**
      * Gets the date and time of when this invitation will expire.

@@ -9,8 +9,7 @@
 
 namespace PolderKnowledge\UserModels;
 
-use DateTimeInterface;
-use Ramsey\Uuid\UuidInterface;
+use DateTimeImmutable;
 
 /**
  * The AccountDetailsInterface should be implemented by the application itself to define application specific fields.
@@ -20,9 +19,9 @@ interface AccountDetailsInterface
     /**
      * Gets the date and time of when the account details were created.
      *
-     * @return DateTimeInterface Returns an instance of type DateTimeInterface
+     * @return DateTimeImmutable Returns an instance of type DateTimeImmutable
      */
-    public function getCreationDate(): DateTimeInterface;
+    public function getCreationDate(): DateTimeImmutable;
 
     /**
      * Gets the account to which this account details belong.

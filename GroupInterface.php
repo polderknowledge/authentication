@@ -9,7 +9,7 @@
 
 namespace PolderKnowledge\UserModels;
 
-use DateTimeInterface;
+use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -27,9 +27,9 @@ interface GroupInterface
     /**
      * Gets the date and time of when this group was created.
      *
-     * @return DateTimeInterface Returns an instance of type DateTimeInterface
+     * @return DateTimeImmutable Returns an instance of type DateTimeImmutable
      */
-    public function getCreationDate(): DateTimeInterface;
+    public function getCreationDate(): DateTimeImmutable;
 
     /**
      * Gets the name of the group.
