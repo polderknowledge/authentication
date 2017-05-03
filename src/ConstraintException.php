@@ -1,6 +1,6 @@
 <?php
 /**
- * Polder Knowledge / Authentication (https://polderknowledge.com)
+ *  Polder Knowledge / Authentication (https://polderknowledge.com)
  *
  * @link https://github.com/polderknowledge/authentication for the canonical source repository
  * @copyright Copyright (c) 2017 Polder Knowledge (https://polderknowledge.com)
@@ -9,12 +9,8 @@
 
 namespace PolderKnowledge\Authentication;
 
-use PHPUnit_Framework_TestCase;
+use RuntimeException;
 
-class SkeletonTest extends PHPUnit_Framework_TestCase
+final class ConstraintException extends RuntimeException
 {
-    public function testTrueIsTrue()
-    {
-        $this->assertTrue(true);
-    }
 }

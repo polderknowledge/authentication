@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 /**
- * Polder Knowledge (http://polderknowledge.nl)
+ * Polder Knowledge / Authentication (https://polderknowledge.com)
  *
- * @link https://github.com/polderknowledge/user-models for the canonical source repository
- * @copyright Copyright (c) 2002-2017 Polder Knowledge (http://www.polderknowledge.nl)
- * @license https://github.com/polderknowledge/user-models/blob/master/LICENSE.md MIT
+ * @link https://github.com/polderknowledge/authentication for the canonical source repository
+ * @copyright Copyright (c) 2017 Polder Knowledge (https://polderknowledge.com)
+ * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
  */
 
-namespace PolderKnowledge\UserModels;
+namespace PolderKnowledge\Authentication;
 
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
@@ -44,6 +44,20 @@ interface GroupInterface
      * @return AccountInterface[] Returns a flat array with instances of type AccountInterface.
      */
     public function getAccounts(): array;
+
+    /**
+     * Adds account to the group
+     *
+     * @param AccountInterface $account
+     */
+    public function addAccount(AccountInterface $account);
+
+    /**
+     * Removes account from group
+     *
+     * @param AccountInterface $account
+     */
+    public function removeAccount(AccountInterface $account);
 
     /**
      * Checks whether or not the group is active.

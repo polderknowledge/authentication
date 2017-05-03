@@ -1,15 +1,25 @@
-<?php declare(strict_types=1);
+<?php
 /**
- * Polder Knowledge (http://polderknowledge.nl)
+ *  Polder Knowledge / Authentication (https://polderknowledge.com)
  *
- * @link https://github.com/polderknowledge/user-models for the canonical source repository
- * @copyright Copyright (c) 2002-2017 Polder Knowledge (http://www.polderknowledge.nl)
- * @license https://github.com/polderknowledge/user-models/blob/master/LICENSE.md MIT
+ * @link https://github.com/polderknowledge/authentication for the canonical source repository
+ * @copyright Copyright (c) 2017 Polder Knowledge (https://polderknowledge.com)
+ * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
  */
 
-namespace PolderKnowledge\UserModels;
+declare(strict_types=1);
+/**
+ * Polder Knowledge / Authentication (https://polderknowledge.com)
+ *
+ * @link https://github.com/polderknowledge/authentication for the canonical source repository
+ * @copyright Copyright (c) 2017 Polder Knowledge (https://polderknowledge.com)
+ * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
+ */
+
+namespace PolderKnowledge\Authentication\Identity;
 
 use DateTimeImmutable;
+use PolderKnowledge\Authentication\AccountInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**

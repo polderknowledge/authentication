@@ -1,0 +1,9 @@
+@startuml
+
+class Account implements AccountInterface
+Account --* IdentityInterface
+Account --* EmailAddressInterface
+
+class CredentialIdentity implements IdentityInterface
+
+@enduml
