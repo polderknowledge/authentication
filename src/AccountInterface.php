@@ -10,6 +10,7 @@
 namespace PolderKnowledge\Authentication;
 
 use DateTimeImmutable;
+use PolderKnowledge\Authentication\Account\Status;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -66,4 +67,9 @@ interface AccountInterface
      * @param GroupInterface $group
      */
     public function removeGroup(GroupInterface $group);
+
+    /**
+     * @param Status $status
+     */
+    public function setStatus(Status $status);
 }

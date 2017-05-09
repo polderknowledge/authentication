@@ -53,17 +53,23 @@ class Account implements AccountInterface
      */
     private $identities;
 
-    public function __construct(array $identities, Status $status, EmailAddress $primaryEmailAddress)
+    public function __construct(array $identities, EmailAddress $primaryEmailAddress, Status $status = null)
     {
+        Assert::greaterThanEq(count($identities), 1, 'Please provide at least one Identity');
         Assert::allIsInstanceOf($identities, IdentityInterface::class);
+
+        if ($status === null) {
+            $status = new Status(Status::ACTIVE);
+        }
 
         $this->id = Uuid::uuid4();
         $this->identities = new ArrayCollection($identities);
-        $this->status = new Status(Status::ACTIVE);
         $this->creationDate = new DateTimeImmutable();
         $this->groups = new ArrayCollection();
         $this->emailAddresses = new ArrayCollection([$primaryEmailAddress]);
         $this->primaryEmailAddress = $primaryEmailAddress;
+        $this->status = $status;
+
     }
 
     /**

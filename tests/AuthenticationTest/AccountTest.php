@@ -32,9 +32,22 @@ final class AccountTest extends PHPUnit_Framework_TestCase
     public function testCreateAccountWithInvalidIdentities()
     {
         new Account(
-            ['string', new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            new EmailAddress()
+            ['string', new CredentialIdentity()], new EmailAddress('foo@example.com'), new Account\Status(Account\Status::ACTIVE)
+        );
+    }
+
+    /**
+     * @covers ::__construct
+     *
+     * @uses \PolderKnowledge\Authentication\EmailAddress
+     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Status
+     * @expectedException \InvalidArgumentException
+     */
+    public function testCreateAccountAtLeastOneIdentity()
+    {
+        new Account(
+            [], new EmailAddress('foo@example.com'), new Account\Status(Account\Status::ACTIVE)
         );
     }
 
@@ -49,11 +62,9 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      */
     public function testPrimaryEmailIsSet()
     {
-        $email = new EmailAddress();
+        $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            $email
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         static::assertSame([$email], $account->getEmailAddresses());
@@ -72,12 +83,10 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      */
     public function testResetPrimary()
     {
-        $email = new EmailAddress();
-        $newPrimary = new EmailAddress();
+        $email = new EmailAddress('foo@example.com');
+        $newPrimary = new EmailAddress('foo@example.eu');
         $account = new Account(
-            [new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            $email
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $previousPrimary = $account->setPrimaryEmailAddress($newPrimary);
@@ -99,12 +108,10 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      */
     public function testAddRemoveEmailAddress()
     {
-        $email = new EmailAddress();
-        $secondaryEmail = new EmailAddress();
+        $email = new EmailAddress('foo@example.com');
+        $secondaryEmail = new EmailAddress('foo@example.eu');
         $account = new Account(
-            [new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            $email
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $account->addEmailAddress($secondaryEmail);
@@ -122,11 +129,9 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      */
     public function testRemovePrimaryEmailThrowsException()
     {
-        $email = new EmailAddress();
+        $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            $email
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $account->removeEmailAddress($email);
@@ -145,11 +150,9 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      */
     public function testAddGroup()
     {
-        $email = new EmailAddress();
+        $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()],
-            new Account\Status(Account\Status::ACTIVE),
-            $email
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $group = new Group();
@@ -161,5 +164,15 @@ final class AccountTest extends PHPUnit_Framework_TestCase
         $account->removeGroup($group);
         static::assertEmpty($account->getGroups());
         static::assertEmpty($group->getAccounts());
+    }
+
+    public function testCreateInactive()
+    {
+        $email = new EmailAddress('foo@example.com');
+        $account = new Account(
+            [new CredentialIdentity()], $email, new Account\Status(Account\Status::INACTIVE)
+        );
+
+        static::assertEquals(Account\Status::INACTIVE, (string)$account->getStatus());
     }
 }
