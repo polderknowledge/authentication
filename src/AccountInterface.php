@@ -72,4 +72,11 @@ interface AccountInterface
      * @param Status $status
      */
     public function setStatus(Status $status);
+
+    /**
+     * Returns the current status of the account.
+     *
+     * @return Status
+     */
+    public function getStatus(): Status;
 }

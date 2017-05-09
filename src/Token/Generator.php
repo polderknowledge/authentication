@@ -7,12 +7,15 @@
  * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
  */
 
-namespace PolderKnowledge\Authentication\Account;
+namespace PolderKnowledge\Authentication\Token;
 
 
-interface ActivationTokenRepository
+interface Generator
 {
-    public function get(string $token): ActivationToken;
-
-    public function add(ActivationToken $token);
+    /**
+     * Generates a random token.
+     *
+     * @return string
+     */
+    public function __invoke(): string;
 }

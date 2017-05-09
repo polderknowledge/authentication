@@ -11,6 +11,7 @@ namespace PolderKnowledge\AuthenticationTest;
 
 use PHPUnit_Framework_TestCase;
 use PolderKnowledge\Authentication\Account;
+use PolderKnowledge\Authentication\AccountInterface;
 use PolderKnowledge\Authentication\EmailAddress;
 use PolderKnowledge\Authentication\Group;
 use PolderKnowledge\Authentication\Identity\CredentialIdentity;
@@ -21,6 +22,16 @@ use PolderKnowledge\Authentication\Identity\CredentialIdentity;
  */
 final class AccountTest extends PHPUnit_Framework_TestCase
 {
+    public static function createActiveAccount(): Account
+    {
+        return new Account(
+            [new CredentialIdentity()],
+            new EmailAddress('foo@bar.nl'),
+            new Account\Status(Account\Status::ACTIVE)
+        );
+    }
+
+
     /**
      * @covers ::__construct
      *

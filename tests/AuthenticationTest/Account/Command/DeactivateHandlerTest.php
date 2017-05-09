@@ -14,6 +14,7 @@ use PolderKnowledge\Authentication\Account\Command\Deactivate;
 use PolderKnowledge\Authentication\Account\Command\DeactivateHandler;
 use PolderKnowledge\Authentication\EmailAddress;
 use PolderKnowledge\Authentication\Identity\CredentialIdentity;
+use PolderKnowledge\AuthenticationTest\AccountTest;
 
 /**
  * @coversDefaultClass PolderKnowledge\Authentication\Account\Command\DeactivateHandler
@@ -26,11 +27,7 @@ final class DeactivateHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeactivate()
     {
-        $account = new Account(
-            [new CredentialIdentity()],
-            new EmailAddress('foo@bar.nl'),
-            new Account\Status(Account\Status::ACTIVE)
-        );
+        $account = AccountTest::createActiveAccount();
 
         $repository = $this->getMockBuilder(Account\Repository::class)->getMock();
         $repository->expects($this->once())
