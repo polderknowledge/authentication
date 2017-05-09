@@ -10,25 +10,40 @@
 namespace PolderKnowledge\Authentication\Account\Command;
 
 
-use PolderKnowledge\Authentication\Account\Repository;
+use PolderKnowledge\Authentication\Account\ActivationTokenRepository;
+use PolderKnowledge\Authentication\Account\Repository as AccountRepository;
 use PolderKnowledge\Authentication\Account\Status;
 
 final class ActivateHandler
 {
     /**
-     * @var Repository
+     * @var AccountRepository
      */
     private $repository;
 
-    public function __construct(Repository $repository)
+    /**
+     * @var ActivationTokenRepository
+     */
+    private $tokenRepository;
+
+    public function __construct(AccountRepository $repository, ActivationTokenRepository $tokenRepository)
     {
         $this->repository = $repository;
+        $this->tokenRepository = $tokenRepository;
     }
-
 
     public function handle(Activate $command)
     {
-        $command->getAccount()->setStatus(new Status(Status::ACTIVE));
-        $this->repository->update($command->getAccount());
+        $token = $command->getToken();
+        $activationToken = $this->tokenRepository->get($token);
+
+        if (!$activationToken->isValid()) {
+            throw new InvalidTokenException();
+        }
+
+        $account = $activationToken->getAccount();
+        $account->setStatus(new Status(Status::ACTIVE));
+
+        $this->repository->update($account);
     }
 }

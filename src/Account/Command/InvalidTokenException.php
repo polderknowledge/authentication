@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /**
  *  Polder Knowledge / Authentication (https://polderknowledge.com)
  *
@@ -9,27 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account\Command;
 
-final class Activate
+final class InvalidTokenException extends \InvalidArgumentException
 {
-    /**
-     * @var string
-     */
-    private $token;
-
-    /**
-     * Activate constructor.
-     * @param string $token
-     */
-    public function __construct(string $token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * @return string
-     */
-    public function getToken(): string
-    {
-        return $this->token;
-    }
 }
