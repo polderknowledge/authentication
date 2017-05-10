@@ -7,14 +7,9 @@
  * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
  */
 
-namespace PolderKnowledge\Authentication\Identity;
+namespace PolderKnowledge\Authentication\Account\Identity;
 
-use PolderKnowledge\Authentication\Account\Identity\IdentityInterface as AccountIdentity;
-
-interface IdentityInterface
+interface Repository
 {
-    /**
-     * @return AccountIdentity|Null
-     */
-    public function getAuthenticationIdentity();
+    public function find($id);
 }

@@ -7,14 +7,42 @@
  * @license https://github.com/polderknowledge/authentication/blob/master/LICENSE.md MIT
  */
 
-namespace PolderKnowledge\Authentication\Identity;
+namespace PolderKnowledge\Authentication\Account\Identity;
 
 use DateTimeImmutable;
+use PolderKnowledge\Authentication\Account;
 use PolderKnowledge\Authentication\AccountInterface;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class CredentialIdentity implements IdentityInterface
 {
+    /**
+     * @var string
+     */
+    private $identity;
+
+    /**
+     * @var UuidInterface
+     */
+    private $id;
+
+    /**
+     * @var DateTimeImmutable
+     */
+    private $creationDate;
+
+    /**
+     * @var Account
+     */
+    private $account;
+
+    public function __construct(string $identity)
+    {
+        $this->id = Uuid::uuid4();
+        $this->creationDate = new DateTimeImmutable();
+        $this->identity = $identity;
+    }
 
     /**
      * Gets the id of this identity.
@@ -23,7 +51,7 @@ class CredentialIdentity implements IdentityInterface
      */
     public function getId(): UuidInterface
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
     /**
@@ -33,7 +61,7 @@ class CredentialIdentity implements IdentityInterface
      */
     public function getCreationDate(): DateTimeImmutable
     {
-        // TODO: Implement getCreationDate() method.
+        return $this->creationDate;
     }
 
     /**
@@ -43,7 +71,7 @@ class CredentialIdentity implements IdentityInterface
      */
     public function getAccount(): AccountInterface
     {
-        // TODO: Implement getAccount() method.
+        return $this->account;
     }
 
     /**
@@ -53,7 +81,7 @@ class CredentialIdentity implements IdentityInterface
      */
     public function getDirectory(): string
     {
-        // TODO: Implement getDirectory() method.
+        return 'local';
     }
 
     /**
@@ -63,6 +91,21 @@ class CredentialIdentity implements IdentityInterface
      */
     public function getIdentity(): string
     {
-        // TODO: Implement getIdentity() method.
+        return $this->identity;
+    }
+
+    /**
+     * Creates a clone of the current identity and adds it to
+     * the account.
+     *
+     * @param AccountInterface $account
+     * @return IdentityInterface
+     */
+    public function withAccount(AccountInterface $account): IdentityInterface
+    {
+        $identity = clone $this;
+        $identity->account = $account;
+
+        return $identity;
     }
 }

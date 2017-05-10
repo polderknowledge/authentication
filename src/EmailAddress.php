@@ -38,7 +38,7 @@ class EmailAddress
         $this->address = $address;
     }
 
-    public function getCreationDate() : \DateTimeImmutable
+    public function getCreationDate(): \DateTimeImmutable
     {
         return $this->creationDate;
     }

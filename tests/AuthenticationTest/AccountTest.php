@@ -14,7 +14,7 @@ use PolderKnowledge\Authentication\Account;
 use PolderKnowledge\Authentication\AccountInterface;
 use PolderKnowledge\Authentication\EmailAddress;
 use PolderKnowledge\Authentication\Group;
-use PolderKnowledge\Authentication\Identity\CredentialIdentity;
+use PolderKnowledge\Authentication\Account\Identity\CredentialIdentity;
 
 /**
  * @coversDefaultClass PolderKnowledge\Authentication\Account
@@ -25,7 +25,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
     public static function createActiveAccount(): Account
     {
         return new Account(
-            [new CredentialIdentity()],
+            [new CredentialIdentity('my-identity')],
             new EmailAddress('foo@bar.nl'),
             new Account\Status(Account\Status::ACTIVE)
         );
@@ -36,14 +36,14 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::__construct
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      * @expectedException \InvalidArgumentException
      */
     public function testCreateAccountWithInvalidIdentities()
     {
         new Account(
-            ['string', new CredentialIdentity()], new EmailAddress('foo@example.com'), new Account\Status(Account\Status::ACTIVE)
+            ['string', new CredentialIdentity('my-identity')], new EmailAddress('foo@example.com'), new Account\Status(Account\Status::ACTIVE)
         );
     }
 
@@ -51,7 +51,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::__construct
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      * @expectedException \InvalidArgumentException
      */
@@ -68,14 +68,14 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::getPrimaryEmailAddress
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      */
     public function testPrimaryEmailIsSet()
     {
         $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         static::assertSame([$email], $account->getEmailAddresses());
@@ -89,7 +89,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::getPrimaryEmailAddress
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      */
     public function testResetPrimary()
@@ -97,7 +97,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
         $email = new EmailAddress('foo@example.com');
         $newPrimary = new EmailAddress('foo@example.eu');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $previousPrimary = $account->setPrimaryEmailAddress($newPrimary);
@@ -114,7 +114,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::addEmailAddress
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      */
     public function testAddRemoveEmailAddress()
@@ -122,7 +122,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
         $email = new EmailAddress('foo@example.com');
         $secondaryEmail = new EmailAddress('foo@example.eu');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $account->addEmailAddress($secondaryEmail);
@@ -142,7 +142,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
     {
         $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $account->removeEmailAddress($email);
@@ -155,7 +155,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
      * @covers ::addEmailAddress
      *
      * @uses \PolderKnowledge\Authentication\EmailAddress
-     * @uses \PolderKnowledge\Authentication\Identity\CredentialIdentity
+     * @uses \PolderKnowledge\Authentication\Account\Identity\CredentialIdentity
      * @uses \PolderKnowledge\Authentication\Account\Status
      * @uses \PolderKnowledge\Authentication\Group
      */
@@ -163,7 +163,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
     {
         $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::ACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::ACTIVE)
         );
 
         $group = new Group();
@@ -181,7 +181,7 @@ final class AccountTest extends PHPUnit_Framework_TestCase
     {
         $email = new EmailAddress('foo@example.com');
         $account = new Account(
-            [new CredentialIdentity()], $email, new Account\Status(Account\Status::INACTIVE)
+            [new CredentialIdentity('my-identity')], $email, new Account\Status(Account\Status::INACTIVE)
         );
 
         static::assertEquals(Account\Status::INACTIVE, (string)$account->getStatus());

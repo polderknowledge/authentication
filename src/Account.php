@@ -13,7 +13,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PolderKnowledge\Authentication\Account\Status;
-use PolderKnowledge\Authentication\Identity\IdentityInterface;
+use PolderKnowledge\Authentication\Account\Identity\IdentityInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Webmozart\Assert\Assert;

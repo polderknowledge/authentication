@@ -11,9 +11,9 @@ namespace PolderKnowledge\AuthenticationTest\Account\Command;
 
 use PolderKnowledge\Authentication\Account\Command\Create;
 use PolderKnowledge\Authentication\Account\Command\CreateHandler;
+use PolderKnowledge\Authentication\Account\Identity\CredentialIdentity;
 use PolderKnowledge\Authentication\Account\Repository;
 use PolderKnowledge\Authentication\EmailAddress;
-use PolderKnowledge\Authentication\Identity\CredentialIdentity;
 
 /**
  * @coversDefaultClass PolderKnowledge\Authentication\Account\Command\CreateHandler
@@ -29,7 +29,7 @@ class CreateHandlerTest extends \PHPUnit_Framework_TestCase
         $repository->expects($this->once())
             ->method('add');
 
-        $command = new Create([new CredentialIdentity()], new EmailAddress('foo@example.com'));
+        $command = new Create([new CredentialIdentity('my-identity')], new EmailAddress('foo@example.com'));
         $handler = new CreateHandler($repository);
 
         $handler->handle($command);

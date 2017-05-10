@@ -14,6 +14,7 @@ use PolderKnowledge\Authentication\Account\Command\Activate;
 use PolderKnowledge\Authentication\Account\Command\ActivateHandler;
 use PolderKnowledge\Authentication\EmailAddress;
 use PolderKnowledge\Authentication\Identity\CredentialIdentity;
+use PolderKnowledge\AuthenticationTest\AccountTest;
 
 final class ActivateHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,9 +38,8 @@ final class ActivateHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testActivateAccount()
     {
-        $account = new Account(
-            [new CredentialIdentity()], new EmailAddress('foo@bar.nl'), new Account\Status(Account\Status::INACTIVE)
-        );
+        $account = AccountTest::createActiveAccount();
+        $account->setStatus(new Account\Status(Account\Status::INACTIVE));
 
         $activationToken = new Account\ActivationToken(
             'someToken',
@@ -81,9 +81,8 @@ final class ActivateHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidToken()
     {
-        $account = new Account(
-            [new CredentialIdentity()], new EmailAddress('foo@bar.nl'), new Account\Status(Account\Status::INACTIVE)
-        );
+        $account = AccountTest::createActiveAccount();
+        $account->setStatus(new Account\Status(Account\Status::INACTIVE));
 
         $activationToken = new Account\ActivationToken(
             'someToken',
