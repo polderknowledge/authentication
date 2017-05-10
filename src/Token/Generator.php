@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Token;
 
-
 interface Generator
 {
     /**

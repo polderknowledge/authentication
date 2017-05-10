@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account;
 
-
 use DateTime;
 use PolderKnowledge\Authentication\AccountInterface;
 use Webmozart\Assert\Assert;

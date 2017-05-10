@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account;
 
-
 interface ActivationTokenRepository
 {
     public function get(string $token): ActivationToken;

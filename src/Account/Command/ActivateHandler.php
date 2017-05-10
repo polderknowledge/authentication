@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account\Command;
 
-
 use PolderKnowledge\Authentication\Account\ActivationTokenRepository;
 use PolderKnowledge\Authentication\Account\Repository as AccountRepository;
 use PolderKnowledge\Authentication\Account\Status;

@@ -69,7 +69,6 @@ class Account implements AccountInterface
         $this->emailAddresses = new ArrayCollection([$primaryEmailAddress]);
         $this->primaryEmailAddress = $primaryEmailAddress;
         $this->status = $status;
-
     }
 
     /**

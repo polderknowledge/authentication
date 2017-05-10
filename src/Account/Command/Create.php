@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account\Command;
 
-
 use PolderKnowledge\Authentication\Account\Status;
 use PolderKnowledge\Authentication\EmailAddress;
 

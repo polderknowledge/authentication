@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account\Command;
 
-
 use PolderKnowledge\Authentication\Account;
 
 final class CreateHandler
@@ -27,7 +26,9 @@ final class CreateHandler
     public function handle(Create $command)
     {
         $account = new Account(
-            $command->getIdentities(), $command->getPrimaryEmail(), $command->getStatus()
+            $command->getIdentities(),
+            $command->getPrimaryEmail(),
+            $command->getStatus()
         );
 
         $this->repository->add($account);

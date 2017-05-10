@@ -9,7 +9,6 @@
 
 namespace PolderKnowledge\Authentication\Account\Command;
 
-
 use PolderKnowledge\Authentication\AccountInterface;
 
 final class Deactivate

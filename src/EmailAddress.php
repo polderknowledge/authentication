@@ -8,6 +8,8 @@
  */
 
 namespace PolderKnowledge\Authentication;
+
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
@@ -21,7 +23,7 @@ class EmailAddress
     private $id;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     private $creationDate;
 
@@ -34,11 +36,11 @@ class EmailAddress
     {
         Assert::stringNotEmpty($address);
         $this->id = Uuid::uuid4();
-        $this->creationDate = new \DateTimeImmutable();
+        $this->creationDate = new DateTimeImmutable();
         $this->address = $address;
     }
 
-    public function getCreationDate(): \DateTimeImmutable
+    public function getCreationDate(): DateTimeImmutable
     {
         return $this->creationDate;
     }
